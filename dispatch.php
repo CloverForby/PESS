@@ -5,7 +5,6 @@ $locationofIncident = $_POST['locationofIncident'];
 $typeofIncident = $_POST['typeofIncident'];
 $descriptionofIncident = $_POST['descriptionofIncident'];
 $cars = [];
-$ch = "";
 
 require_once 'db.php';
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
@@ -82,7 +81,9 @@ if ($btnDispatchClicked == true)
 
     if ($insertIncidentSuccess === true && $updateSuccess === true && $insertDispatchSuccess === true)
     {
-        header("Location: logcall.php?message=success" . $carId);
+        echo ("<script type='text/javascript'>
+			alert(' Car, ". $carId ." , has been dispatched');
+			location='logcall.php?message=success" . $carId . "'</script>");
     }
 
 }
