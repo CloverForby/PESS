@@ -5,6 +5,7 @@ $locationofIncident = $_POST['locationofIncident'];
 $typeofIncident = $_POST['typeofIncident'];
 $descriptionofIncident = $_POST['descriptionofIncident'];
 $cars = [];
+$ch = "";
 
 require_once 'db.php';
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
@@ -17,7 +18,10 @@ while ($row = $result->fetch_assoc())
     $status = $row['patrolcar_status_desc'];
     $car = ["id" => $id, "status" => $status];
     array_push($cars, $car);
+
 }
+
+
 $btnDispatchClicked = isset($_POST['btnDispatch']);
 
 $btnProcessCallClicked = isset($_POST['btnProcessCall']);
@@ -160,7 +164,12 @@ for ($i = 0;$i < count($cars);$i++)
     echo '<td>' . $car['id'] . '</td>';
     echo '<td>' . $car['status'] . '</td>';
     echo '<td>';
-    echo '<input type="checkbox" name="cbCarSelection[]" value="' . $car['id'] . '">';
+    //Removed checkbox next to dispatched cars
+    if ($car['status'] == 'Dispatched'){
+    	echo ' ';
+    } else {
+    	echo '<input type="checkbox" name="cbCarSelection[]" value="' . $car['id'] . '">';
+    }
     echo '<td>';
     echo '<tr>';
 }
