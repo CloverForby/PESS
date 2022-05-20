@@ -63,9 +63,6 @@
 			if (e==null || e=="") {
 				alert("Write a short Description");
 				return false;
-			} else if ( e.length > 100) {
-				alert("Write a shorter Description");
-				return false;
 			}
 		}
 	</script>
